@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const API_BASE = process.env.NODE_ENV === 'production'
+    ? (process.env.REACT_APP_API_BASE_URL || '')
+    : '';
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -12,7 +15,7 @@ function App() {
   const fetchNotes = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/notes');
+      const res = await fetch(`${API_BASE}/api/notes`);
       if (!res.ok) throw new Error('Failed to load notes');
       const data = await res.json();
       setNotes(data);
@@ -39,7 +42,7 @@ function App() {
     setError('');
     try {
       const payload = { title, content };
-      const res = await fetch(editingId ? `/api/notes/${editingId}` : '/api/notes', {
+      const res = await fetch(editingId ? `${API_BASE}/api/notes/${editingId}` : `${API_BASE}/api/notes`, {
         method: editingId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -61,7 +64,7 @@ function App() {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this note?')) return;
     try {
-      const res = await fetch(`/api/notes/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/api/notes/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Delete failed');
       fetchNotes();
     } catch (e) {
