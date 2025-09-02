@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
-  const API_BASE = process.env.NODE_ENV === 'production'
-    ? (process.env.REACT_APP_API_BASE_URL || '')
-    : '';
+  // Use the environment variable directly
+  const API_BASE = process.env.REACT_APP_API_BASE_URL; // <-- CHANGE HERE
+
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -15,7 +15,7 @@ function App() {
   const fetchNotes = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${API_BASE}/api/notes`);
+      const res = await fetch(`${API_BASE}/api/notes`); // points to Render backend
       if (!res.ok) throw new Error('Failed to load notes');
       const data = await res.json();
       setNotes(data);
