@@ -8,7 +8,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/notes")
-@CrossOrigin(origins = "http://localhost:3000") // allow React frontend
+@CrossOrigin(origins = {
+        "http://localhost:3000", // for local testing
+        "https://notes-app-web-k790.onrender.com" // deployed frontend
+})
 public class NoteController {
 
     private final NoteRepository repo;
