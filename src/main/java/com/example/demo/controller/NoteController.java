@@ -11,7 +11,7 @@ import java.util.List;
 @CrossOrigin(origins = {
         "http://localhost:3000",                     // for local testing
         "https://notes-app-lzmx.onrender.com",      // your backend URL
-        "https://notes-app.vercel.app"              // your frontend deployed on Vercel
+        "https://og-note.vercel.app"                // Vercel frontend URL
 })
 public class NoteController {
 
