@@ -9,8 +9,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/notes")
 @CrossOrigin(origins = {
-        "http://localhost:3000", // for local testing
-        "https://notes-app-web-k790.onrender.com" // deployed frontend
+        "http://localhost:3000",                     // for local testing
+        "https://notes-app-lzmx.onrender.com",      // your backend URL
+        "https://notes-app.vercel.app"              // your frontend deployed on Vercel
 })
 public class NoteController {
 
